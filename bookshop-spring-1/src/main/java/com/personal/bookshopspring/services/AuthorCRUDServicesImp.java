@@ -3,7 +3,6 @@ package com.personal.bookshopspring.services;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.personal.bookshopspring.models.Author;
@@ -12,8 +11,11 @@ import com.personal.bookshopspring.repositories.AuthorRepository;
 @Service
 public class AuthorCRUDServicesImp implements AuthorCRUDServices{
 	
-	@Autowired
-	AuthorRepository repository;
+	private final AuthorRepository repository;
+	
+	public AuthorCRUDServicesImp(AuthorRepository repository) {
+		this.repository = repository;
+	}
 
 	@Override
 	public Author save(Author author) {

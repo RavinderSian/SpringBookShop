@@ -2,7 +2,6 @@ package com.personal.bookshopspring.controllers;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -21,8 +20,11 @@ import com.personal.bookshopspring.services.AuthorCRUDServicesImp;
 @RequestMapping("/author")
 public class AuthorController {
 
-	@Autowired
-	AuthorCRUDServicesImp authorServices;
+	private final AuthorCRUDServicesImp authorServices;
+
+	public AuthorController(AuthorCRUDServicesImp authorServices) {
+		this.authorServices = authorServices;
+	}
 
 	@GetMapping("/{id}")
 	public ResponseEntity<?> getAuthor(@PathVariable Long id) {

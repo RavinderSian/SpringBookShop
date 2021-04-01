@@ -2,7 +2,6 @@ package com.personal.bookshopspring.controllers;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -21,8 +20,11 @@ import com.personal.bookshopspring.services.BookCRUDServicesImp;
 @RequestMapping("/book")
 public class BookController {
 
-	@Autowired
-	BookCRUDServicesImp bookServices;
+	private final BookCRUDServicesImp bookServices;
+	
+	public BookController(BookCRUDServicesImp bookServices) {
+		this.bookServices = bookServices;
+	}
 
 	@GetMapping("/{id}")
 	public ResponseEntity<?> getBook(@PathVariable Long id) {
