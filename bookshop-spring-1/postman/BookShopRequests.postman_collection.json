@@ -1,0 +1,677 @@
+{
+	"info": {
+		"_postman_id": "f10037e7-e841-45d7-8af8-1e147c8dcf40",
+		"name": "BookShopRequests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "BookRequests",
+			"item": [
+				{
+					"name": "findBookById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/book/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"book",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addBook",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\":\"title\",\r\n    \"genre\":{\r\n        \"genre_id\":1\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/book/add",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"book",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteBook",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/book/delete/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"book",
+								"delete",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllBooks",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/book/all",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"book",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "changeTitle",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "New title f",
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/book/newtitle/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"book",
+								"newtitle",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetSales",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/book/1/sales",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"book",
+								"1",
+								"sales"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "AuthorRequests",
+			"item": [
+				{
+					"name": "GetAuthor",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/author/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"author",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAllAuthors",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/author/all",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"author",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AddAuthor",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\":\"ravinder\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/author/add",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"author",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteAuthor",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/book/delete/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"book",
+								"delete",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ChangeFirstName",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "Ravsian"
+						},
+						"url": {
+							"raw": "localhost:8080/author/changefirstname/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"author",
+								"changefirstname",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetBooks",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/author/books/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"author",
+								"books",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "GenreRequests",
+			"item": [
+				{
+					"name": "GetGenre",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/genre/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"genre",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAllGenres",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ChangeGenreName",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "Coding"
+						},
+						"url": {
+							"raw": "localhost:8080/genre/genrename/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"genre",
+								"genrename",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteGenre",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/genre/delete/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"genre",
+								"delete",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetBooks",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/genre/1/books",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"genre",
+								"1",
+								"books"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AddGenre",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"coding\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/genre/add",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"genre",
+								"add"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "SalesRequests",
+			"item": [
+				{
+					"name": "GetSale",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/sale/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"sale",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAllSales",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/sale/all",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"sale",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteSale",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/sale/delete/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"sale",
+								"delete",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AddSale",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"pricePaid\":15.2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/sale/add",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"sale",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ChangePricePaid",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "15.2",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/sale/newprice/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"sale",
+								"newprice",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetCustomer",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "CustomerRequests",
+			"item": [
+				{
+					"name": "GetCustomer",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/customer/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"customer",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAllCustomers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/customer/all",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"customer",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteCustomer",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/customer/delete/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"customer",
+								"delete",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AddCustomer",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\":\"ravinder\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/customer/add",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"customer",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ChangeFirstName",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "newname"
+						},
+						"url": {
+							"raw": "localhost:8080/customer/namechange/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"customer",
+								"namechange",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetPurchases",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/customer/1/purchases",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"customer",
+								"1",
+								"purchases"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
