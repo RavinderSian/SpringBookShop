@@ -11,8 +11,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -22,19 +22,23 @@ import com.personal.bookshopspring.services.SalesCRUDServices;
 import com.personal.bookshopspring.services.SalesCRUDServicesImp;
 
 @SpringBootTest
-public class SalesCRUDServicesTests {
+class SalesCRUDServicesTests {
 	
 	@Mock
-	Sales mockSale;
+	private Sales mockSale;
 
 	@Mock
-	SalesRepository mockRepository;
+	private SalesRepository mockRepository;
+	
+	private SalesCRUDServices services;
 
-	@InjectMocks
-	SalesCRUDServices services = new SalesCRUDServicesImp();
-
+	@BeforeEach
+	void setUp() {
+		services = new SalesCRUDServicesImp(mockRepository);
+	}
+	
 	@Test
-	public void test_SaveCallsRepositorySave_WhenCalled() {
+	void test_SaveCallsRepositorySave_WhenCalled() {
 		// Act
 		services.save(mockSale);
 		// Assert
@@ -44,7 +48,7 @@ public class SalesCRUDServicesTests {
 	}
 
 	@Test
-	public void test_SaveReturnsCorrectSale_WhenGivenSale() {
+	void test_SaveReturnsCorrectSale_WhenGivenSale() {
 		// Act
 		Sales sale = services.save(mockSale);
 		// Assert
@@ -52,7 +56,7 @@ public class SalesCRUDServicesTests {
 	}
 
 	@Test
-	public void test_DeleteCallsRepositoryDelete_WhenCalled() {
+	void test_DeleteCallsRepositoryDelete_WhenCalled() {
 		// Act
 		services.delete(mockSale);
 		// Assert
@@ -62,7 +66,7 @@ public class SalesCRUDServicesTests {
 	}
 
 	@Test
-	public void test_FindAllCallsRepositoryFindAll_WhenCalled() {
+	void test_FindAllCallsRepositoryFindAll_WhenCalled() {
 		// Act
 		services.findAll();
 		// Assert
@@ -71,7 +75,7 @@ public class SalesCRUDServicesTests {
 	}
 
 	@Test
-	public void test_FindAllReturnsListOfSize1_WhenGivenSale() {
+	void test_FindAllReturnsListOfSize1_WhenGivenSale() {
 		// Arrange
 		when(services.findAll()).thenReturn(new ArrayList<Sales>(Arrays.asList(mockSale)));
 		// Act
@@ -81,7 +85,7 @@ public class SalesCRUDServicesTests {
 	}
 
 	@Test
-	public void test_FindAllReturnsListOfSize0_WhenGivenNothing() {
+	void test_FindAllReturnsListOfSize0_WhenGivenNothing() {
 		// Arrange
 		when(services.findAll()).thenReturn(new ArrayList<Sales>());
 		// Act
@@ -91,7 +95,7 @@ public class SalesCRUDServicesTests {
 	}
 
 	@Test
-	public void test_FindByIdCallsRepositoryFindById_WhenCalled() {
+	void test_FindByIdCallsRepositoryFindById_WhenCalled() {
 		// Act
 		services.findById(1L); // 1L is of type Long, while 1 is int
 		// Assert
@@ -100,7 +104,7 @@ public class SalesCRUDServicesTests {
 	}
 
 	@Test
-	public void test_FindByIdReturnsCorrectSale_WhenGivenId() {
+	void test_FindByIdReturnsCorrectSale_WhenGivenId() {
 		// Arrange
 		when(services.findById(1L)).thenReturn(Optional.of(mockSale));
 		// Mockito.doReturn(Optional.of(mockBook)).when(services).findById(1L);

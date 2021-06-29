@@ -22,7 +22,7 @@ public class AuthorController {
 
 	private final AuthorCRUDServicesImp authorServices;
 
-	public AuthorController(AuthorCRUDServicesImp authorServices) {
+	public AuthorController(final AuthorCRUDServicesImp authorServices) {
 		this.authorServices = authorServices;
 	}
 
@@ -30,12 +30,8 @@ public class AuthorController {
 	public ResponseEntity<?> getAuthor(@PathVariable Long id) {
 
 		Author result = authorServices.findById(id).orElse(null);
-
-		if (result == null) {
-			return new ResponseEntity<String>("Author id not present", HttpStatus.NOT_FOUND);
-		}
-		return new ResponseEntity<Author>(result, HttpStatus.FOUND);
-
+		return result == null ? new ResponseEntity<>("Author id not present", HttpStatus.NOT_FOUND) : new ResponseEntity<>(result, HttpStatus.FOUND);
+		
 	}
 
 	@GetMapping("/delete/{id}")
@@ -44,11 +40,11 @@ public class AuthorController {
 		Author result = authorServices.findById(id).orElse(null);
 
 		if (result == null) {
-			return new ResponseEntity<Author>(HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		} else {
 			authorServices.delete(result);
 			String deletedMessage = "Deleted author of Id " + id.toString();
-			return new ResponseEntity<String>(deletedMessage, HttpStatus.FOUND);
+			return new ResponseEntity<>(deletedMessage, HttpStatus.FOUND);
 
 		}
 
@@ -60,9 +56,9 @@ public class AuthorController {
 		Author result = authorServices.save(author);
 
 		if (bindingResult.hasErrors()) {
-			return new ResponseEntity<String>("Could not create object", HttpStatus.NOT_ACCEPTABLE);
+			return new ResponseEntity<>("Could not create object", HttpStatus.NOT_ACCEPTABLE);
 		} else {
-			return new ResponseEntity<Author>(result, HttpStatus.CREATED);
+			return new ResponseEntity<>(result, HttpStatus.CREATED);
 
 		}
 
@@ -73,7 +69,7 @@ public class AuthorController {
 
 		List<Author> result = authorServices.findAll();
 
-		return new ResponseEntity<List<Author>>(result, HttpStatus.FOUND);
+		return new ResponseEntity<>(result, HttpStatus.FOUND);
 
 	}
 
@@ -82,12 +78,12 @@ public class AuthorController {
 
 		Author author = authorServices.findById(id).orElse(null);
 		if (author == null) {
-			return new ResponseEntity<String>("Author id not present", HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>("Author id not present", HttpStatus.NOT_FOUND);
 		}
 		
 		author.setFirstName(firstName);
 
-		return new ResponseEntity<Author>(author, HttpStatus.FOUND);
+		return new ResponseEntity<>(author, HttpStatus.FOUND);
 
 	}
 	
@@ -99,9 +95,9 @@ public class AuthorController {
 		List<Book> result = author.getBooks();
 
 		if (result == null) {
-			return new ResponseEntity<String>("Author id not present", HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>("Author id not present", HttpStatus.NOT_FOUND);
 		} else {
-			return new ResponseEntity<List<Book>>(result, HttpStatus.FOUND);
+			return new ResponseEntity<>(result, HttpStatus.FOUND);
 
 		}
 
