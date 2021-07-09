@@ -11,8 +11,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -22,7 +22,7 @@ import com.personal.bookshopspring.services.BookCRUDServices;
 import com.personal.bookshopspring.services.BookCRUDServicesImp;
 
 @SpringBootTest
-public class BookCRUDServicesTests {
+class BookCRUDServicesTests {
 	
 	@Mock
 	private Book mockBook;
@@ -30,11 +30,15 @@ public class BookCRUDServicesTests {
 	@Mock
 	private BookRepository mockRepository;
 	
-	@InjectMocks
-	private BookCRUDServices services = new BookCRUDServicesImp();
+	private BookCRUDServices services;
+	
+	@BeforeEach
+	void setUp() {
+		this.services = new BookCRUDServicesImp(mockRepository);
+	}
 	
 	@Test
-	public void test_SaveCallsRepositorySave_WhenCalled() {
+	void test_SaveCallsRepositorySave_WhenCalled() {
 		//Act
 		services.save(mockBook);
 		//Assert
@@ -44,7 +48,7 @@ public class BookCRUDServicesTests {
 	}
 	
 	@Test
-	public void test_SaveReturnsCorrectBook_WhenGivenBook() {
+	void test_SaveReturnsCorrectBook_WhenGivenBook() {
 		//Act
 		Book book = services.save(mockBook);
 		//Assert
@@ -52,7 +56,7 @@ public class BookCRUDServicesTests {
 	}
 	
 	@Test
-	public void test_DeleteCallsRepositoryDelete_WhenCalled() {
+	void test_DeleteCallsRepositoryDelete_WhenCalled() {
 		//Act
 		services.delete(mockBook);
 		//Assert
@@ -62,7 +66,7 @@ public class BookCRUDServicesTests {
 	}
 	
 	@Test
-	public void test_FindAllCallsRepositoryFindAll_WhenCalled() {
+	void test_FindAllCallsRepositoryFindAll_WhenCalled() {
 		//Act
 		services.findAll();
 		//Assert
@@ -71,7 +75,7 @@ public class BookCRUDServicesTests {
 	}
 	
 	@Test
-	public void test_FindAllReturnsListOfSize1_WhenGivenBook() {
+	void test_FindAllReturnsListOfSize1_WhenGivenBook() {
 		//Arrange
 		when(services.findAll()).thenReturn(new ArrayList<Book>(Arrays.asList(mockBook)));
 		//Act
@@ -81,7 +85,7 @@ public class BookCRUDServicesTests {
 	}
 	
 	@Test
-	public void test_FindAllReturnsListOfSize0_WhenGivenNothing() {
+	void test_FindAllReturnsListOfSize0_WhenGivenNothing() {
 		//Arrange
 		when(services.findAll()).thenReturn(new ArrayList<Book>());
 		//Act
@@ -91,7 +95,7 @@ public class BookCRUDServicesTests {
 	}
 	
 	@Test
-	public void test_FindByIdCallsRepositoryFindById_WhenCalled() {
+	void test_FindByIdCallsRepositoryFindById_WhenCalled() {
 		//Act
 		services.findById(1L); //1L is of type Long, while 1 is int
 		//Assert
@@ -101,12 +105,11 @@ public class BookCRUDServicesTests {
 	
 	
 	@Test
-	public void test_FindByIdReturnsCorrectBook_WhenGivenId() {
+	void test_FindByIdReturnsCorrectBook_WhenGivenId() {
 		//Arrange
 		when(services.findById(1L)).thenReturn(Optional.of(mockBook));
-		//Mockito.doReturn(Optional.of(mockBook)).when(services).findById(1L);
 		//Act
-		Optional<Book> book = services.findById(1L); //1L is of type Long, while 1 is int
+		Optional<Book> book = services.findById(1L);
 		//Assert
 		Assertions.assertEquals(Optional.of(mockBook), book);
 	}

@@ -2,7 +2,6 @@ package com.personal.bookshopspring.controllers;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -15,14 +14,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.personal.bookshopspring.models.Sales;
 import com.personal.bookshopspring.services.SalesCRUDServices;
-import com.personal.bookshopspring.services.SalesCRUDServicesImp;
 
 @RestController
 @RequestMapping("/sale")
 public class SalesController {
-
-	@Autowired
-	SalesCRUDServices salesServices = new SalesCRUDServicesImp();
+	
+	private final SalesCRUDServices salesServices;
+	
+	public SalesController(SalesCRUDServices salesServices) {
+		this.salesServices = salesServices;
+	}
 
 	@GetMapping("/{id}")
 	public ResponseEntity<?> getSale(@PathVariable Long id) {

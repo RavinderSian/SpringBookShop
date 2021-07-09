@@ -26,7 +26,7 @@ public class BookshopSpring1Application implements CommandLineRunner{
 	AuthorRepository authorRepository;
 	
 	@Autowired
-	SalesRepository salesRepository;
+	SalesRepository salesRepository; 
 	
 	@Autowired
 	GenreRepository genreRepository;

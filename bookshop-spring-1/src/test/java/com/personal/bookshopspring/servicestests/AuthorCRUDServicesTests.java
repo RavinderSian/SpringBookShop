@@ -11,8 +11,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -22,19 +22,23 @@ import com.personal.bookshopspring.services.AuthorCRUDServices;
 import com.personal.bookshopspring.services.AuthorCRUDServicesImp;
 
 @SpringBootTest
-public class AuthorCRUDServicesTests {
+class AuthorCRUDServicesTests {
 
 	@Mock
-	Author mockAuthor;
+	private Author mockAuthor;
 	
 	@Mock
-	AuthorRepository mockRepository;
+	private AuthorRepository mockRepository;
 	
-	@InjectMocks
-	AuthorCRUDServices services = new AuthorCRUDServicesImp();
+	private AuthorCRUDServices services;;
+
+	@BeforeEach
+	void setUp() throws Exception {
+		services = new AuthorCRUDServicesImp(mockRepository);
+	}
 	
 	@Test
-	public void test_SaveCallsRepositorySave_WhenCalled() {
+	void test_SaveCallsRepositorySave_WhenCalled() {
 		//Act
 		services.save(mockAuthor);
 		//Assert
@@ -44,7 +48,7 @@ public class AuthorCRUDServicesTests {
 	}
 	
 	@Test
-	public void test_SaveReturnsCorrectAuthor_WhenGivenAuthor() {
+	void test_SaveReturnsCorrectAuthor_WhenGivenAuthor() {
 		//Act
 		Author author = services.save(mockAuthor);
 		//Assert
@@ -53,7 +57,7 @@ public class AuthorCRUDServicesTests {
 	
 	
 	@Test
-	public void test_DeleteCallsRepositoryDelete_WhenCalled() {
+	void test_DeleteCallsRepositoryDelete_WhenCalled() {
 		//Act
 		services.delete(mockAuthor);
 		//Assert
@@ -63,7 +67,7 @@ public class AuthorCRUDServicesTests {
 	}
 	
 	@Test
-	public void test_FindAllCallsRepositoryFindAll_WhenCalled() {
+	void test_FindAllCallsRepositoryFindAll_WhenCalled() {
 		//Act
 		services.findAll();
 		//Assert
@@ -72,7 +76,7 @@ public class AuthorCRUDServicesTests {
 	}
 	
 	@Test
-	public void test_FindAllReturnsListOfSize1_WhenGivenAuthor() {
+	void test_FindAllReturnsListOfSize1_WhenGivenAuthor() {
 		//Arrange
 		when(services.findAll()).thenReturn(new ArrayList<Author>(Arrays.asList(mockAuthor)));
 		//Act
@@ -82,7 +86,7 @@ public class AuthorCRUDServicesTests {
 	}
 	
 	@Test
-	public void test_FindAllReturnsListOfSize0_WhenGivenNothing() {
+	void test_FindAllReturnsListOfSize0_WhenGivenNothing() {
 		//Arrange
 		when(services.findAll()).thenReturn(new ArrayList<Author>());
 		//Act
@@ -92,7 +96,7 @@ public class AuthorCRUDServicesTests {
 	}
 	
 	@Test
-	public void test_FindByIdCallsRepositoryFindById_WhenCalled() {
+	void test_FindByIdCallsRepositoryFindById_WhenCalled() {
 		//Act
 		services.findById(1L); //1L is of type Long, while 1 is int
 		//Assert
@@ -102,7 +106,7 @@ public class AuthorCRUDServicesTests {
 	
 	
 	@Test
-	public void test_FindByIdReturnsCorrectAuthor_WhenGivenId() {
+	void test_FindByIdReturnsCorrectAuthor_WhenGivenId() {
 		//Arrange
 		when(services.findById(1L)).thenReturn(Optional.of(mockAuthor));
 		//Mockito.doReturn(Optional.of(mockBook)).when(services).findById(1L);

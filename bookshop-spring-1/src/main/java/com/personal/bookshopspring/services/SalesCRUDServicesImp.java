@@ -3,7 +3,6 @@ package com.personal.bookshopspring.services;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.personal.bookshopspring.models.Sales;
@@ -12,8 +11,11 @@ import com.personal.bookshopspring.repositories.SalesRepository;
 @Service
 public class SalesCRUDServicesImp implements SalesCRUDServices{
 	
-	@Autowired
-	SalesRepository repository;
+	private final SalesRepository repository;
+
+	public SalesCRUDServicesImp(SalesRepository repository) {
+		this.repository = repository;
+	}
 
 	@Override
 	public Sales save(Sales sales) {
