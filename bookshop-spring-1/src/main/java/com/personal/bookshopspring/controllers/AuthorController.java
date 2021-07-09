@@ -30,7 +30,9 @@ public class AuthorController {
 	public ResponseEntity<?> getAuthor(@PathVariable Long id) {
 
 		Author result = authorServices.findById(id).orElse(null);
-		return result == null ? new ResponseEntity<>("Author id not present", HttpStatus.NOT_FOUND) : new ResponseEntity<>(result, HttpStatus.FOUND);
+		return result == null 
+		? new ResponseEntity<>("Author id not present", HttpStatus.NOT_FOUND)
+		: new ResponseEntity<>(result, HttpStatus.FOUND);
 		
 	}
 

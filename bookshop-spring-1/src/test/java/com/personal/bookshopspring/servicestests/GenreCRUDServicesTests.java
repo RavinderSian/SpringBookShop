@@ -34,7 +34,7 @@ class GenreCRUDServicesTests {
 	
 	@BeforeEach
 	void setUp() {
-		this.services = new GenreCRUDServiceImp(mockRepository);
+		services = new GenreCRUDServiceImp(mockRepository);
 	}
 	
 	@Test

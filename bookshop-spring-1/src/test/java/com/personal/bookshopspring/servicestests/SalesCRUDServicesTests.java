@@ -34,7 +34,7 @@ class SalesCRUDServicesTests {
 
 	@BeforeEach
 	void setUp() {
-		services = new SalesCRUDServicesImp(mockRepository);
+		this.services = new SalesCRUDServicesImp(mockRepository);
 	}
 	
 	@Test
