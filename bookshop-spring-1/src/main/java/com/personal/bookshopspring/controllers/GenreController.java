@@ -2,7 +2,6 @@ package com.personal.bookshopspring.controllers;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -21,8 +20,11 @@ import com.personal.bookshopspring.services.GenreCRUDServiceImp;
 @RequestMapping("/genre")
 public class GenreController {
 
-	@Autowired
-	GenreCRUDServiceImp genreServices;
+	private final GenreCRUDServiceImp genreServices;
+
+	public GenreController(GenreCRUDServiceImp genreServices) {
+		this.genreServices = genreServices;
+	}
 
 	@GetMapping("/{id}")
 	public ResponseEntity<?> getGenre(@PathVariable Long id) {
