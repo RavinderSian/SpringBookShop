@@ -17,3 +17,15 @@ All requests that contain an Id in the URL have error handling for when an entry
 
 Objects can be deleted by passing the id in the request:
 ![](https://github.com/RavinderSian/SpringBookShop/blob/master/bookshop-spring-1/screenshots/Deleted.JPG)
+
+To save an object a POST request is used:
+![](https://github.com/RavinderSian/SpringBookShop/blob/master/bookshop-spring-1/screenshots/Add%20Book.JPG)
+
+There are also POST requests to update properties of some objects for example a books title:
+![](https://github.com/RavinderSian/SpringBookShop/blob/master/bookshop-spring-1/screenshots/Update%20Book%20title.JPG)
+
+There are GET requests to find all entires of an object type:
+![](https://github.com/RavinderSian/SpringBookShop/blob/master/bookshop-spring-1/screenshots/Get%20All%20Books.JPG)
+
+Mapped objects can also be retrived for most objects using a GET request, for examples the sales of a book:
+![](https://github.com/RavinderSian/SpringBookShop/blob/master/bookshop-spring-1/screenshots/Get%20Sales.JPG)
