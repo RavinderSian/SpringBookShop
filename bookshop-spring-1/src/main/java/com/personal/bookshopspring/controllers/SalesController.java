@@ -6,8 +6,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,7 +17,7 @@ import com.personal.bookshopspring.services.SalesCRUDServices;
 
 @RestController
 @RequestMapping("/sale")
-public class SalesController {
+public class SalesController implements CrudController<Sales, Long> {
 	
 	private final SalesCRUDServices salesServices;
 	
@@ -25,20 +25,17 @@ public class SalesController {
 		this.salesServices = salesServices;
 	}
 
-	@GetMapping("/{id}")
-	public ResponseEntity<?> getSale(@PathVariable Long id) {
+	public ResponseEntity<?> getEntity(@PathVariable Long id) {
 
 		Sales result = salesServices.findById(id).orElse(null);
 
 		if (result == null) {
 			return new ResponseEntity<String>("Sale id not present", HttpStatus.NOT_FOUND);
 		}
-		return new ResponseEntity<Sales>(result, HttpStatus.FOUND);
-
+		return new ResponseEntity<Sales>(result, HttpStatus.OK);
 	}
 
-	@GetMapping("/delete/{id}")
-	public ResponseEntity<?> deleteGenre(@PathVariable Long id) {
+	public ResponseEntity<?> delete(@PathVariable Long id) {
 
 		Sales result = salesServices.findById(id).orElse(null);
 
@@ -47,47 +44,36 @@ public class SalesController {
 		} else {
 			salesServices.delete(result);
 			String deletedMessage = "Deleted customer of Id " + id.toString();
-			return new ResponseEntity<String>(deletedMessage, HttpStatus.FOUND);
-
+			return new ResponseEntity<String>(deletedMessage, HttpStatus.OK);
 		}
-
 	}
-
-	@PostMapping("/add")
-	public ResponseEntity<?> addGenre(@RequestBody Sales sale, BindingResult bindingResult) {
+	
+	public ResponseEntity<?> add(@RequestBody Sales sale, BindingResult bindingResult) {
 
 		Sales result = salesServices.save(sale);
-
 		if (bindingResult.hasErrors()) {
-			return new ResponseEntity<String>("Could not create object", HttpStatus.NOT_ACCEPTABLE);
+			return new ResponseEntity<String>("Could not create object", HttpStatus.BAD_REQUEST);
 		} else {
-			return new ResponseEntity<Sales>(result, HttpStatus.CREATED);
-
+			return new ResponseEntity<Sales>(result, HttpStatus.OK);
 		}
-
 	}
 
 	@GetMapping("/all")
-	public ResponseEntity<?> getAllGenres() {
-
+	public ResponseEntity<?> getAll() {
 		List<Sales> result = salesServices.findAll();
-
-		return new ResponseEntity<List<Sales>>(result, HttpStatus.FOUND);
-
+		return new ResponseEntity<List<Sales>>(result, HttpStatus.OK);
 	}
 
-	@PostMapping("/newprice/{id}")
-	public ResponseEntity<?> updatePricePaid(@PathVariable Long id, @RequestBody double price, BindingResult bindingResult) {
+	@PatchMapping("/newprice/{id}")
+	public ResponseEntity<?> updatePrice(@PathVariable Long id, @RequestBody double price, BindingResult bindingResult) {
 
 		Sales sale = salesServices.findById(id).orElse(null);
-		
 		if(sale == null) {
 			return new ResponseEntity<String>("sale id not present", HttpStatus.NOT_FOUND);
 		}		
-		
 		sale.setPricePaid(price);
-		return new ResponseEntity<Sales>(sale, HttpStatus.FOUND);
-
+		salesServices.save(sale);
+		return new ResponseEntity<Sales>(sale, HttpStatus.OK);
 	}
 	
 }

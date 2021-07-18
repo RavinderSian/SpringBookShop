@@ -30,7 +30,7 @@
 				{
 					"name": "addBook",
 					"request": {
-						"method": "POST",
+						"method": "PUT",
 						"header": [],
 						"body": {
 							"mode": "raw",
@@ -58,7 +58,7 @@
 				{
 					"name": "deleteBook",
 					"request": {
-						"method": "GET",
+						"method": "DELETE",
 						"header": [],
 						"url": {
 							"raw": "localhost:8080/book/delete/1",
@@ -97,7 +97,7 @@
 				{
 					"name": "changeTitle",
 					"request": {
-						"method": "POST",
+						"method": "PATCH",
 						"header": [],
 						"body": {
 							"mode": "raw",
@@ -189,7 +189,7 @@
 				{
 					"name": "AddAuthor",
 					"request": {
-						"method": "POST",
+						"method": "PUT",
 						"header": [],
 						"body": {
 							"mode": "raw",
@@ -217,16 +217,16 @@
 				{
 					"name": "DeleteAuthor",
 					"request": {
-						"method": "GET",
+						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/book/delete/1",
+							"raw": "localhost:8080/author/delete/1",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"book",
+								"author",
 								"delete",
 								"1"
 							]
@@ -237,7 +237,7 @@
 				{
 					"name": "ChangeFirstName",
 					"request": {
-						"method": "POST",
+						"method": "PATCH",
 						"header": [],
 						"body": {
 							"mode": "raw",
@@ -308,7 +308,15 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": ""
+							"raw": "localhost:8080/genre/all",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"genre",
+								"all"
+							]
 						}
 					},
 					"response": []
@@ -316,11 +324,11 @@
 				{
 					"name": "ChangeGenreName",
 					"request": {
-						"method": "POST",
+						"method": "PATCH",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "Coding"
+							"raw": "New Coding"
 						},
 						"url": {
 							"raw": "localhost:8080/genre/genrename/1",
@@ -340,7 +348,7 @@
 				{
 					"name": "DeleteGenre",
 					"request": {
-						"method": "GET",
+						"method": "DELETE",
 						"header": [],
 						"url": {
 							"raw": "localhost:8080/genre/delete/1",
@@ -380,7 +388,7 @@
 				{
 					"name": "AddGenre",
 					"request": {
-						"method": "POST",
+						"method": "PUT",
 						"header": [],
 						"body": {
 							"mode": "raw",
@@ -451,7 +459,7 @@
 				{
 					"name": "DeleteSale",
 					"request": {
-						"method": "GET",
+						"method": "DELETE",
 						"header": [],
 						"url": {
 							"raw": "localhost:8080/sale/delete/1",
@@ -471,7 +479,7 @@
 				{
 					"name": "AddSale",
 					"request": {
-						"method": "POST",
+						"method": "PUT",
 						"header": [],
 						"body": {
 							"mode": "raw",
@@ -499,7 +507,7 @@
 				{
 					"name": "ChangePricePaid",
 					"request": {
-						"method": "POST",
+						"method": "PATCH",
 						"header": [],
 						"body": {
 							"mode": "raw",
@@ -521,17 +529,6 @@
 								"newprice",
 								"1"
 							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "GetCustomer",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": ""
 						}
 					},
 					"response": []
@@ -582,7 +579,7 @@
 				{
 					"name": "DeleteCustomer",
 					"request": {
-						"method": "GET",
+						"method": "DELETE",
 						"header": [],
 						"url": {
 							"raw": "localhost:8080/customer/delete/1",
@@ -602,7 +599,7 @@
 				{
 					"name": "AddCustomer",
 					"request": {
-						"method": "POST",
+						"method": "PUT",
 						"header": [],
 						"body": {
 							"mode": "raw",
@@ -630,7 +627,7 @@
 				{
 					"name": "ChangeFirstName",
 					"request": {
-						"method": "POST",
+						"method": "PATCH",
 						"header": [],
 						"body": {
 							"mode": "raw",
