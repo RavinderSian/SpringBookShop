@@ -6,8 +6,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -52,7 +52,6 @@ public class AuthorController implements CrudController<Author, Long>{
 			return new ResponseEntity<>("Could not create object", HttpStatus.NOT_ACCEPTABLE);
 		} else {
 			return new ResponseEntity<>(result, HttpStatus.OK);
-
 		}
 	}
 
@@ -61,34 +60,26 @@ public class AuthorController implements CrudController<Author, Long>{
 		return new ResponseEntity<>(result, HttpStatus.OK);
 	}
 
-	@PostMapping("/changefirstname/{id}")
+	@PatchMapping("/changefirstname/{id}")
 	public ResponseEntity<?> updateFirstName(@PathVariable Long id, @RequestBody String firstName) {
 
 		Author author = authorServices.findById(id).orElse(null);
 		if (author == null) {
 			return new ResponseEntity<>("Author id not present", HttpStatus.NOT_FOUND);
 		}
-		
 		author.setFirstName(firstName);
-
+		authorServices.save(author);
 		return new ResponseEntity<>(author, HttpStatus.OK);
-
 	}
 	
 	@GetMapping("/books/{id}")
 	public ResponseEntity<?> getBooks(@PathVariable Long id) {
-
 		Author author = authorServices.findById(id).orElse(null);
-		
 		List<Book> result = author.getBooks();
-
 		if (result == null) {
 			return new ResponseEntity<>("Author id not present", HttpStatus.NOT_FOUND);
 		} else {
 			return new ResponseEntity<>(result, HttpStatus.OK);
-
 		}
-
 	}
-
 }

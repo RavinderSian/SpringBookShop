@@ -6,8 +6,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -60,7 +60,7 @@ public class BookController implements CrudController<Book, Long>{
 		return new ResponseEntity<List<Book>>(result, HttpStatus.OK);
 	}
 
-	@PostMapping("/newtitle/{id}")
+	@PatchMapping("/newtitle/{id}")
 	public ResponseEntity<?> updateTitle(@PathVariable Long id, @RequestBody String title) {
 
 		Book book = bookServices.findById(id).orElse(null);
@@ -68,6 +68,7 @@ public class BookController implements CrudController<Book, Long>{
 			return new ResponseEntity<String>("Book id not found", HttpStatus.NOT_FOUND);
 		}
 		book.setTitle(title);
+		bookServices.save(book);
 		return new ResponseEntity<Book>(book, HttpStatus.OK);
 	}
 
