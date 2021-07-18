@@ -18,7 +18,7 @@ import com.personal.bookshopspring.services.BookCRUDServicesImp;
 
 @RestController
 @RequestMapping("/book")
-public class BookController {
+public class BookController implements CrudController<Book, Long>{
 
 	private final BookCRUDServicesImp bookServices;
 	
@@ -26,85 +26,61 @@ public class BookController {
 		this.bookServices = bookServices;
 	}
 
-	@GetMapping("/{id}")
-	public ResponseEntity<?> getBook(@PathVariable Long id) {
-
+	public ResponseEntity<?> getEntity(@PathVariable Long id) {
 		Book result = bookServices.findById(id).orElse(null);
-
 		if (result == null) {
 			return new ResponseEntity<String>("Book id not found", HttpStatus.NOT_FOUND);
 		}
-		return new ResponseEntity<Book>(result, HttpStatus.FOUND);
-
+		return new ResponseEntity<Book>(result, HttpStatus.OK);
 	}
 
-	@GetMapping("/delete/{id}")
-	public ResponseEntity<?> deleteBook(@PathVariable Long id) {
+	public ResponseEntity<?> delete(@PathVariable Long id) {
 
 		Book result = bookServices.findById(id).orElse(null);
-
 		if (result == null) {
 			return new ResponseEntity<String>("Book id not found", HttpStatus.NOT_FOUND);
 		} else {
 			bookServices.delete(result);
 			String deletedMessage = "Deleted book of Id " + id.toString();
-			return new ResponseEntity<String>(deletedMessage, HttpStatus.FOUND);
-
+			return new ResponseEntity<String>(deletedMessage, HttpStatus.OK);
 		}
-
 	}
 
-	@PostMapping("/add")
-	public ResponseEntity<?> addBook(@RequestBody Book book, BindingResult bindingResult) {
-
+	public ResponseEntity<?> add(@RequestBody Book book, BindingResult bindingResult) {
 		Book result = bookServices.save(book);
-
 		if (bindingResult.hasErrors()) {
-			return new ResponseEntity<String>("Could not create object", HttpStatus.NOT_ACCEPTABLE);
+			return new ResponseEntity<String>("Could not create object", HttpStatus.BAD_REQUEST);
 		} else {
-			return new ResponseEntity<Book>(result, HttpStatus.CREATED);
-
+			return new ResponseEntity<Book>(result, HttpStatus.OK);
 		}
-
 	}
 
-	@GetMapping("/all")
-	public ResponseEntity<?> getAllBooks() {
-
+	public ResponseEntity<?> getAll() {
 		List<Book> result = bookServices.findAll();
-
-		return new ResponseEntity<List<Book>>(result, HttpStatus.FOUND);
-
+		return new ResponseEntity<List<Book>>(result, HttpStatus.OK);
 	}
 
 	@PostMapping("/newtitle/{id}")
 	public ResponseEntity<?> updateTitle(@PathVariable Long id, @RequestBody String title) {
 
 		Book book = bookServices.findById(id).orElse(null);
-
 		if (book == null) {
 			return new ResponseEntity<String>("Book id not found", HttpStatus.NOT_FOUND);
 		}
 		book.setTitle(title);
-
-		return new ResponseEntity<Book>(book, HttpStatus.FOUND);
-
+		return new ResponseEntity<Book>(book, HttpStatus.OK);
 	}
 
 	@GetMapping("/{id}/sales")
 	public ResponseEntity<?> getBooks(@PathVariable Long id) {
 
 		Book book = bookServices.findById(id).orElse(null);
-
 		List<Sales> result = book.getSales();
 
 		if (result == null) {
 			return new ResponseEntity<String>("Book id not found", HttpStatus.NOT_FOUND);
 		} else {
-			return new ResponseEntity<List<Sales>>(result, HttpStatus.FOUND);
-
+			return new ResponseEntity<List<Sales>>(result, HttpStatus.OK);
 		}
-
 	}
-	 
 }

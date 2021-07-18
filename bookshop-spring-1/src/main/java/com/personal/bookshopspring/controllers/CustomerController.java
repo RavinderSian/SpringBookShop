@@ -18,7 +18,7 @@ import com.personal.bookshopspring.services.CustomerCRUDServicesImp;
 
 @RestController
 @RequestMapping("/customer")
-public class CustomerController {
+public class CustomerController implements CrudController<Customer, Long> {
 	
 	private final CustomerCRUDServicesImp customerServices;
 	
@@ -26,20 +26,17 @@ public class CustomerController {
 		this.customerServices = customerServices;
 	}
 
-	@GetMapping("/{id}")
-	public ResponseEntity<?> getCustomer(@PathVariable Long id){
+	public ResponseEntity<?> getEntity(@PathVariable Long id){
 		
 		Customer result = customerServices.findById(id).orElse(null);
 		
 		if (result == null) {
 			return new ResponseEntity<String>("Customer id not present", HttpStatus.NOT_FOUND);
 		}
-		return new ResponseEntity<Customer>(result, HttpStatus.FOUND);
-		
+		return new ResponseEntity<Customer>(result, HttpStatus.OK);
 	}
 	
-	@GetMapping("/delete/{id}")
-	public ResponseEntity<?> deleteCustomer(@PathVariable Long id){
+	public ResponseEntity<?> delete(@PathVariable Long id){
 		
 		Customer result = customerServices.findById(id).orElse(null);
 		
@@ -48,35 +45,23 @@ public class CustomerController {
 		}else {
 			customerServices.delete(result);
 			String deletedMessage = "Deleted customer of Id " + id.toString();
-			return new ResponseEntity<String>(deletedMessage, HttpStatus.FOUND);
-
+			return new ResponseEntity<String>(deletedMessage, HttpStatus.OK);
 		}
-		
 	}
 	
-	
-	@PostMapping("/add")
-	public ResponseEntity<?> addBook(@RequestBody Customer customer, BindingResult bindingResult){
-		
-		
+	public ResponseEntity<?> add(@RequestBody Customer customer, BindingResult bindingResult){
 		Customer result = customerServices.save(customer);
 		
 		if (bindingResult.hasErrors()) {
-			return new ResponseEntity<String>("Could not create customer", HttpStatus.NOT_ACCEPTABLE);
+			return new ResponseEntity<String>("Could not create customer", HttpStatus.BAD_REQUEST);
 		}else {
-			return new ResponseEntity<Customer>(result, HttpStatus.CREATED);
-
+			return new ResponseEntity<Customer>(result, HttpStatus.OK);
 		}
-		
 	}
 	
-	@GetMapping("/all")
-	public ResponseEntity<?> getAllCustomer(){
-		 
+	public ResponseEntity<?> getAll(){
 		List<Customer> result = customerServices.findAll();
-		
-		return new ResponseEntity<List<Customer>>(result, HttpStatus.FOUND);
-		
+		return new ResponseEntity<List<Customer>>(result, HttpStatus.OK);
 	}
 	
 	@PostMapping("/namechange/{id}")
@@ -87,10 +72,8 @@ public class CustomerController {
 		if (customer == null) {
 			return new ResponseEntity<String>("Customer id not present", HttpStatus.NOT_FOUND);
 		}
-		
 		customer.setFirstName(firstName);
-		return new ResponseEntity<Customer>(customer, HttpStatus.FOUND);
-		
+		return new ResponseEntity<Customer>(customer, HttpStatus.OK);
 	}
 	
 	@GetMapping("/{id}/purchases")
@@ -102,7 +85,7 @@ public class CustomerController {
 			return new ResponseEntity<String>("Customer id not present", HttpStatus.NOT_FOUND);
 		}
 		List<Sales> purchases = customer.getSales();
-		return new ResponseEntity<List<Sales>>(purchases, HttpStatus.FOUND);
+		return new ResponseEntity<List<Sales>>(purchases, HttpStatus.OK);
 		
 	}
 
