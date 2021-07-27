@@ -33,6 +33,7 @@ public class Sales {
 	@Column(name = "amount_paid")
 	private double pricePaid;
 	
+	@JsonIgnore
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"}) 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "fk_book_id")

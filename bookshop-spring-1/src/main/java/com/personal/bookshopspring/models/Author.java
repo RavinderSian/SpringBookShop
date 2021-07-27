@@ -36,5 +36,15 @@ public class Author {
 	public Author() {
 		
 	}
+	
+	public void addBook(Book book) {
+		books.add(book);
+		book.setAuthor(this);
+	}
+	
+	public void removeBook(Book book) {
+		books.remove(book);
+		book.setAuthor(null);
+	}
 
 }

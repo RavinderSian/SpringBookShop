@@ -43,7 +43,7 @@ public class SalesController implements CrudController<Sales, Long> {
 			return new ResponseEntity<String>("Sale id not present", HttpStatus.NOT_FOUND);
 		} else {
 			salesServices.delete(result);
-			String deletedMessage = "Deleted customer of Id " + id.toString();
+			String deletedMessage = "Deleted sale of id " + id.toString();
 			return new ResponseEntity<String>(deletedMessage, HttpStatus.OK);
 		}
 	}
@@ -69,7 +69,7 @@ public class SalesController implements CrudController<Sales, Long> {
 
 		Sales sale = salesServices.findById(id).orElse(null);
 		if(sale == null) {
-			return new ResponseEntity<String>("sale id not present", HttpStatus.NOT_FOUND);
+			return new ResponseEntity<String>("Sale id not present", HttpStatus.NOT_FOUND);
 		}		
 		sale.setPricePaid(price);
 		salesServices.save(sale);

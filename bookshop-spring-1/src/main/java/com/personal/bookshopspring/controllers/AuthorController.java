@@ -14,15 +14,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.personal.bookshopspring.models.Author;
 import com.personal.bookshopspring.models.Book;
-import com.personal.bookshopspring.services.AuthorCRUDServicesImp;
+import com.personal.bookshopspring.services.AuthorCRUDServices;
 
 @RestController
 @RequestMapping("/author")
 public class AuthorController implements CrudController<Author, Long>{
 
-	private final AuthorCRUDServicesImp authorServices;
+	private final AuthorCRUDServices authorServices;
 
-	public AuthorController(final AuthorCRUDServicesImp authorServices) {
+	public AuthorController(final AuthorCRUDServices authorServices) {
 		this.authorServices = authorServices;
 	}
 
