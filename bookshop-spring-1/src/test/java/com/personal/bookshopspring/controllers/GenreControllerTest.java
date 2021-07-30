@@ -112,7 +112,6 @@ class GenreControllerTest implements ControllerTest {
 		mockMvc.perform(put("/genre/add").contentType(MediaType.APPLICATION_JSON_VALUE).content(requestJson))
 		.andExpect(content().json("{'genreId' : 1, 'name' : 'test'}"))
 		.andExpect(status().isOk());
-
 	}
 
 	@Override

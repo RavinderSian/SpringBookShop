@@ -1,5 +1,6 @@
 package com.personal.bookshopspring.models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -31,7 +32,7 @@ public class Author {
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "author", orphanRemoval = true)
-	private List<Book> books;
+	private List<Book> books = new ArrayList<>();
 	
 	public Author() {
 		

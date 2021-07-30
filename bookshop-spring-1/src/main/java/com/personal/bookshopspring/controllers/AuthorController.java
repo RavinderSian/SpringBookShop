@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.personal.bookshopspring.models.Author;
-import com.personal.bookshopspring.models.Book;
 import com.personal.bookshopspring.services.AuthorCRUDServices;
 
 @RestController
@@ -34,13 +33,12 @@ public class AuthorController implements CrudController<Author, Long>{
 	}
 
 	public ResponseEntity<?> delete(@PathVariable Long id) {
-
 		Author result = authorServices.findById(id).orElse(null);
 		if (result == null) {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>("Author id not present", HttpStatus.NOT_FOUND);
 		} else {
 			authorServices.delete(result);
-			String deletedMessage = "Deleted author of Id " + id.toString();
+			String deletedMessage = "Deleted author of id " + id.toString();
 			return new ResponseEntity<>(deletedMessage, HttpStatus.OK);
 		}
 	}
@@ -75,11 +73,10 @@ public class AuthorController implements CrudController<Author, Long>{
 	@GetMapping("/books/{id}")
 	public ResponseEntity<?> getBooks(@PathVariable Long id) {
 		Author author = authorServices.findById(id).orElse(null);
-		List<Book> result = author.getBooks();
-		if (result == null) {
+		if (author == null) {
 			return new ResponseEntity<>("Author id not present", HttpStatus.NOT_FOUND);
 		} else {
-			return new ResponseEntity<>(result, HttpStatus.OK);
+			return new ResponseEntity<>(author.getBooks(), HttpStatus.OK);
 		}
 	}
 }

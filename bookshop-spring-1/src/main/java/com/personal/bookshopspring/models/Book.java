@@ -35,11 +35,13 @@ public class Book {
 	@Column(name = "price")
 	private double price;
 	
+	@JsonIgnore
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"}) 
 	@JoinColumn(name = "fk_genre_id")
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Genre genre;
 	
+	@JsonIgnore
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"}) 
 	@JoinColumn(name = "fk_author_id")
 	@ManyToOne(fetch = FetchType.LAZY)
