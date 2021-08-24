@@ -33,7 +33,7 @@ public class Genre {
 	@OneToMany(mappedBy = "genre", orphanRemoval = true)
 	private List<Book> books = new ArrayList<>();
 
-	public Genre() {
+	public Genre() { //need empty constructor for jpa
 
 	}
 	

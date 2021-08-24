@@ -28,32 +28,28 @@ public class AuthorController implements CrudController<Author, Long>{
 	public ResponseEntity<?> getEntity(@PathVariable Long id) {
 		Author result = authorServices.findById(id).orElse(null);
 		return result == null 
-		? new ResponseEntity<>("Author id not present", HttpStatus.NOT_FOUND)
+		? new ResponseEntity<>(HttpStatus.NOT_FOUND)
 		: new ResponseEntity<>(result, HttpStatus.OK);
 	}
 
 	public ResponseEntity<?> delete(@PathVariable Long id) {
 		Author result = authorServices.findById(id).orElse(null);
 		if (result == null) {
-			return new ResponseEntity<>("Author id not present", HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		} else {
 			authorServices.delete(result);
-			String deletedMessage = "Deleted author of id " + id.toString();
-			return new ResponseEntity<>(deletedMessage, HttpStatus.OK);
+			return new ResponseEntity<>(HttpStatus.OK);
 		}
 	}
 
 	public ResponseEntity<?> add(@RequestBody Author author, BindingResult bindingResult) {
 		Author result = authorServices.save(author);
-
-		if (bindingResult.hasErrors()) {
-			return new ResponseEntity<>("Could not create object", HttpStatus.NOT_ACCEPTABLE);
-		} else {
-			return new ResponseEntity<>(result, HttpStatus.OK);
-		}
+		return bindingResult.hasErrors()
+		? new ResponseEntity<>("Could not create object", HttpStatus.BAD_REQUEST)
+		: new ResponseEntity<>(result, HttpStatus.OK);
 	}
 
-	public ResponseEntity<?> getAll() {
+	public ResponseEntity<List<Author>> getAll() {
 		List<Author> result = authorServices.findAll();
 		return new ResponseEntity<>(result, HttpStatus.OK);
 	}
@@ -72,11 +68,9 @@ public class AuthorController implements CrudController<Author, Long>{
 	
 	@GetMapping("/books/{id}")
 	public ResponseEntity<?> getBooks(@PathVariable Long id) {
-		Author author = authorServices.findById(id).orElse(null);
-		if (author == null) {
-			return new ResponseEntity<>("Author id not present", HttpStatus.NOT_FOUND);
-		} else {
-			return new ResponseEntity<>(author.getBooks(), HttpStatus.OK);
-		}
+		return authorServices.findById(id).isPresent()
+		?  new ResponseEntity<>(authorServices.findById(id).get().getBooks(), HttpStatus.OK)
+		:  new ResponseEntity<>("Author id not present", HttpStatus.NOT_FOUND);
 	}
+	
 }

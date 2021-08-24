@@ -26,7 +26,6 @@ public class BookCRUDServicesImp implements BookCRUDServices {
 	@Override
 	public void delete(Book book) {
 		repository.delete(book);
-		
 	}
 
 	@Override
@@ -36,8 +35,8 @@ public class BookCRUDServicesImp implements BookCRUDServices {
 
 	@Override
 	public Optional<Book> findById(Long id) {
-		Book book = repository.findById(id).orElse(null); //.orElse(null) returns null when id is not present or an object of type Book when the id is present in db
-		return Optional.ofNullable(book);
+		//.orElse(null) returns null when id is not present or an object of type Book when the id is present in db
+		return Optional.ofNullable(repository.findById(id).orElse(null));
 	}
 
 }

@@ -26,7 +26,6 @@ public class SalesCRUDServicesImp implements SalesCRUDServices{
 	@Override
 	public void delete(Sales sales) {
 		repository.delete(sales);
-
 	}
 
 	@Override
@@ -36,8 +35,7 @@ public class SalesCRUDServicesImp implements SalesCRUDServices{
 
 	@Override
 	public Optional<Sales> findById(Long id) {
-		Sales sales =  this.repository.findById(id).orElse(null);
-		return Optional.ofNullable(sales);
+		return Optional.ofNullable(repository.findById(id).orElse(null));
 	}
 
 }

@@ -40,7 +40,7 @@ public class Customer {
 	@OneToMany(mappedBy = "customer", orphanRemoval = true)
 	private List<Sales> sales;
 	
-	public Customer() {
+	public Customer() { //need empty constructor for jpa
 		
 	}
 }

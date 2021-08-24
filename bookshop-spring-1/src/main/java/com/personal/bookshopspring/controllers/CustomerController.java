@@ -27,9 +27,8 @@ public class CustomerController implements CrudController<Customer, Long> {
 	public ResponseEntity<?> getEntity(@PathVariable Long id){
 		
 		Customer result = customerServices.findById(id).orElse(null);
-		
 		if (result == null) {
-			return new ResponseEntity<>("Customer id not present", HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 		return new ResponseEntity<>(result, HttpStatus.OK);
 	}
@@ -39,25 +38,22 @@ public class CustomerController implements CrudController<Customer, Long> {
 		Customer result = customerServices.findById(id).orElse(null);
 		
 		if (result == null) {
-			return new ResponseEntity<>("Customer id not present", HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}else {
 			customerServices.delete(result);
-			String deletedMessage = "Deleted customer of id " + id.toString();
-			return new ResponseEntity<>(deletedMessage, HttpStatus.OK);
+			return new ResponseEntity<>(HttpStatus.OK);
 		}
 	}
 	
 	public ResponseEntity<?> add(@RequestBody Customer customer, BindingResult bindingResult){
 		Customer result = customerServices.save(customer);
+		return bindingResult.hasErrors()
+		? new ResponseEntity<>("Could not create customer", HttpStatus.BAD_REQUEST)
+		: new ResponseEntity<>(result, HttpStatus.OK);
 		
-		if (bindingResult.hasErrors()) {
-			return new ResponseEntity<>("Could not create customer", HttpStatus.BAD_REQUEST);
-		}else {
-			return new ResponseEntity<>(result, HttpStatus.OK);
-		}
 	}
 	
-	public ResponseEntity<?> getAll(){
+	public ResponseEntity<List<Customer>> getAll(){
 		List<Customer> result = customerServices.findAll();
 		return new ResponseEntity<>(result, HttpStatus.OK);
 	}
@@ -68,7 +64,7 @@ public class CustomerController implements CrudController<Customer, Long> {
 		Customer customer = customerServices.findById(id).orElse(null);
 		
 		if (customer == null) {
-			return new ResponseEntity<>("Customer id not present", HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 		customer.setFirstName(firstName);
 		customerServices.save(customer);

@@ -28,7 +28,6 @@ public class SalesController implements CrudController<Sales, Long> {
 	public ResponseEntity<?> getEntity(@PathVariable Long id) {
 
 		Sales result = salesServices.findById(id).orElse(null);
-
 		if (result == null) {
 			return new ResponseEntity<String>("Sale id not present", HttpStatus.NOT_FOUND);
 		}
@@ -59,7 +58,7 @@ public class SalesController implements CrudController<Sales, Long> {
 	}
 
 	@GetMapping("/all")
-	public ResponseEntity<?> getAll() {
+	public ResponseEntity<List<Sales>> getAll() {
 		List<Sales> result = salesServices.findAll();
 		return new ResponseEntity<List<Sales>>(result, HttpStatus.OK);
 	}

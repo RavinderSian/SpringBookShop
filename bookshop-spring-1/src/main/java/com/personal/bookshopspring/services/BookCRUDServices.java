@@ -8,11 +8,7 @@ import com.personal.bookshopspring.models.Book;
 public interface BookCRUDServices {
 
 	Book save(Book book);
-
 	void delete(Book book);
-
 	List<Book> findAll();
-
 	Optional<Book> findById(Long id);
-
 }

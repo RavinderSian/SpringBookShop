@@ -1,5 +1,7 @@
 package com.personal.bookshopspring.controllers;
 
+import java.util.List;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,7 +16,7 @@ public interface CrudController<T, ID> {
 	public ResponseEntity<?> getEntity(@PathVariable ID id);
 	
 	@GetMapping("/all")
-	public ResponseEntity<?> getAll();
+	public ResponseEntity<List<T>> getAll();
 	
 	@PutMapping("/add")
 	public ResponseEntity<?> add(@RequestBody T t, BindingResult bindingResult);

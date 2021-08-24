@@ -72,7 +72,6 @@ class CustomerControllerTest implements ControllerTest {
 	@Override
 	public void test_GetEntity_ReturnsCorrectStatusAndResponse_WhenEntityNotPresent() throws Exception {
 		mockMvc.perform(get("/customer/1"))
-		.andExpect(content().string("Customer id not present"))
 		.andExpect(status().isNotFound());
 	}
 
@@ -84,20 +83,16 @@ class CustomerControllerTest implements ControllerTest {
 		customer.setCustomerId(1L);
 		customer.setFirstName("test");
 		customer.setLastName("testing");
-		
 		when(services.findById(1L)).thenReturn(Optional.of(customer));
 		
 		mockMvc.perform(delete("/customer/delete/1"))
-		.andExpect(content().string("Deleted customer of id 1"))
 		.andExpect(status().isOk());
 	}
 
 	@Test
 	@Override
 	public void test_Delete_ReturnsCorrectStatusAndResponse_WhenEntityNotPresent() throws Exception {
-
 		mockMvc.perform(delete("/customer/delete/1"))
-		.andExpect(content().string("Customer id not present"))
 		.andExpect(status().isNotFound());
 	}
 
@@ -166,7 +161,6 @@ class CustomerControllerTest implements ControllerTest {
 	@Test
 	void test_UpdateFirstName_ReturnsCorrectStatusAndResponse_WhenEntityNotPresentAndRequestValid() throws Exception {
 		mockMvc.perform(patch("/customer/namechange/10").contentType(MediaType.APPLICATION_JSON_VALUE).content("new"))
-		.andExpect(content().string("Customer id not present"))
 		.andExpect(status().isNotFound());
 	}
 

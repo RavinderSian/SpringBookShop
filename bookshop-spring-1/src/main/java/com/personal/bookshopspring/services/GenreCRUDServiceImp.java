@@ -26,7 +26,6 @@ public class GenreCRUDServiceImp implements GenreCRUDServices {
 	@Override
 	public void delete(Genre genre) {
 		repository.delete(genre);
-
 	}
 
 	@Override
@@ -36,8 +35,7 @@ public class GenreCRUDServiceImp implements GenreCRUDServices {
 
 	@Override
 	public Optional<Genre> findById(Long id) {
-		Genre genre =  this.repository.findById(id).orElse(null);
-		return Optional.ofNullable(genre);
+		return Optional.ofNullable(repository.findById(id).orElse(null));
 	}
 
 }

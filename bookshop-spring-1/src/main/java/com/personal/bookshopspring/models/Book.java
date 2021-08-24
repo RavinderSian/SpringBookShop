@@ -51,7 +51,7 @@ public class Book {
 	@OneToMany(mappedBy = "book", orphanRemoval = true)
 	private List<Sales> sales = new ArrayList<>();
 	
-	public Book() {
+	public Book() { //need empty constructor for jpa
 		
 	}
 	

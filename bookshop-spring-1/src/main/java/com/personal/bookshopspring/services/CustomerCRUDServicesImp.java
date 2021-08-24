@@ -26,7 +26,6 @@ public class CustomerCRUDServicesImp implements CustomerCRUDServices{
 	@Override
 	public void delete(Customer customer) {
 		repository.delete(customer);
-
 	}
 
 	@Override
@@ -36,7 +35,6 @@ public class CustomerCRUDServicesImp implements CustomerCRUDServices{
 
 	@Override
 	public Optional<Customer> findById(Long id) {
-		Customer customer =  this.repository.findById(id).orElse(null);
-		return Optional.ofNullable(customer);
+		return Optional.ofNullable(repository.findById(id).orElse(null));
 	}
 }

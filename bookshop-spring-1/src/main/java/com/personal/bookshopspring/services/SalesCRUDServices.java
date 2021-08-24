@@ -11,5 +11,4 @@ public interface SalesCRUDServices {
 	void delete(Sales sales);
 	List<Sales> findAll();
 	Optional<Sales> findById(Long id);
-
 }

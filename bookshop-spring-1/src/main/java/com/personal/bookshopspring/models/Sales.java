@@ -45,7 +45,7 @@ public class Sales {
 	@JoinColumn(name = "fk_customer_id")
 	private Customer customer;
 	
-	public Sales() {
+	public Sales() { //need empty constructor for jpa
 		
 	}
 	

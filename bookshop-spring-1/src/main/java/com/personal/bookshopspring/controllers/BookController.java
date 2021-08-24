@@ -28,7 +28,7 @@ public class BookController implements CrudController<Book, Long>{
 	public ResponseEntity<?> getEntity(@PathVariable Long id) {
 		Book result = bookServices.findById(id).orElse(null);
 		if (result == null) {
-			return new ResponseEntity<>("Book id not found", HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 		return new ResponseEntity<>(result, HttpStatus.OK);
 	}
@@ -37,26 +37,22 @@ public class BookController implements CrudController<Book, Long>{
 	public ResponseEntity<?> delete(@PathVariable Long id) {
 		Book result = bookServices.findById(id).orElse(null);
 		if (result == null) {
-			return new ResponseEntity<>("Book id not found", HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		} else {
 			bookServices.delete(result);
-			String deletedMessage = "Deleted book of Id " + id.toString();
-			return new ResponseEntity<>(deletedMessage, HttpStatus.OK);
+			return new ResponseEntity<>(HttpStatus.OK);
 		}
 	}
 
 	@Override
 	public ResponseEntity<?> add(@RequestBody Book book, BindingResult bindingResult) {
-		Book result = bookServices.save(book);
-		if (bindingResult.hasErrors()) {
-			return new ResponseEntity<>("Could not create object", HttpStatus.NOT_FOUND);
-		} else {
-			return new ResponseEntity<>(result, HttpStatus.OK);
-		}
+		return bindingResult.hasErrors()
+		? new ResponseEntity<>(HttpStatus.NOT_FOUND)
+		: new ResponseEntity<>(bookServices.save(book), HttpStatus.OK);
 	}
 
 	@Override
-	public ResponseEntity<?> getAll() {
+	public ResponseEntity<List<Book>> getAll() {
 		List<Book> result = bookServices.findAll();
 		return new ResponseEntity<>(result, HttpStatus.OK);
 	}
@@ -66,7 +62,7 @@ public class BookController implements CrudController<Book, Long>{
 
 		Book book = bookServices.findById(id).orElse(null);
 		if (book == null) {
-			return new ResponseEntity<>("Book id not found", HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 		book.setTitle(title);
 		bookServices.save(book);

@@ -30,21 +30,19 @@ public class GenreController implements CrudController<Genre, Long> {
 
 		Genre result = genreServices.findById(id).orElse(null);
 		if (result == null) {
-			return new ResponseEntity<>("Genre id not present", HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 		return new ResponseEntity<>(result, HttpStatus.OK);
-
 	}
 
 	public ResponseEntity<?> delete(@PathVariable Long id) {
 
 		Genre result = genreServices.findById(id).orElse(null);
 		if (result == null) {
-			return new ResponseEntity<>("Genre id not present", HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		} else {
 			genreServices.delete(result);
-			String deletedMessage = "Deleted genre of id " + id.toString();
-			return new ResponseEntity<>(deletedMessage, HttpStatus.OK);
+			return new ResponseEntity<>(HttpStatus.OK);
 		}
 	}
 
@@ -52,16 +50,14 @@ public class GenreController implements CrudController<Genre, Long> {
 		Genre result = genreServices.save(genre);
 
 		if (bindingResult.hasErrors()) {
-			return new ResponseEntity<>("Could not create object", HttpStatus.NOT_ACCEPTABLE);
+			return new ResponseEntity<>("Could not create object", HttpStatus.BAD_REQUEST);
 		} else {
 			return new ResponseEntity<>(result, HttpStatus.OK);
 		}
 	}
 
-	public ResponseEntity<?> getAll() {
-
+	public ResponseEntity<List<Genre>> getAll() {
 		List<Genre> result = genreServices.findAll();
-
 		return new ResponseEntity<>(result, HttpStatus.OK);
 	}
 
@@ -70,7 +66,7 @@ public class GenreController implements CrudController<Genre, Long> {
 		Genre genre = genreServices.findById(id).orElse(null);
 		
 		if (genre == null) {
-			return new ResponseEntity<>("Genre id not present", HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 		genre.setName(name);
 		genreServices.save(genre);
@@ -84,7 +80,7 @@ public class GenreController implements CrudController<Genre, Long> {
 		Genre genre = genreServices.findById(id).orElse(null);
 
 		if (genre == null) {
-			return new ResponseEntity<>("Genre id not present", HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		} else {
 			List<Book> books = genre.getBooks();
 			return new ResponseEntity<>(books, HttpStatus.OK);

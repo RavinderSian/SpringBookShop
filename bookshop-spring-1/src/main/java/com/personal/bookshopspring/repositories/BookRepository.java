@@ -6,5 +6,4 @@ import com.personal.bookshopspring.models.Book;
 
 public interface BookRepository extends CrudRepository<Book, Long> {
 
-	
 }

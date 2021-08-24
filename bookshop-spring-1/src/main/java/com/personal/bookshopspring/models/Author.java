@@ -34,7 +34,7 @@ public class Author {
 	@OneToMany(mappedBy = "author", orphanRemoval = true)
 	private List<Book> books = new ArrayList<>();
 	
-	public Author() {
+	public Author() { //need empty constructor for jpa
 		
 	}
 	
