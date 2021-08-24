@@ -5,9 +5,6 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Assertions;
@@ -43,54 +40,6 @@ class GenreCRUDServicesTests {
 		services.save(mockGenre);
 		//Assert
 		verify(mockRepository, times(1)).save(mockGenre);
-		verifyNoMoreInteractions(mockRepository);
-	}
-	
-	@Test
-	void test_Save_ReturnsCorrectGenre_WhenGivenGenre() {
-		//Arrange
-		when(services.save(mockGenre)).thenReturn(mockGenre);
-		//Act
-		Genre genre = services.save(mockGenre);
-		//Assert
-		Assertions.assertEquals(mockGenre, genre);
-	}
-	
-	@Test
-	void test_FindAll_CallsRepositoryFindAll_WhenCalled(){
-		//Act
-		services.findAll();
-		//Assert
-		verify(mockRepository, times(1)).findAll();
-		verifyNoMoreInteractions(mockRepository);
-	}
-	
-	@Test
-	void test_FindAll_ReturnsListOfSize1_WhenCalled(){
-		//Arrange
-		when(services.findAll()).thenReturn(new ArrayList<Genre>(Arrays.asList(mockGenre)));
-		//Act
-		List<Genre> genres = services.findAll();
-		//Assert
-		Assertions.assertEquals(1, genres.size());
-	}
-	
-	@Test
-	void test_FindAll_ReturnsListOfSize0_WhenCalled(){
-		//Arrange
-		when(services.findAll()).thenReturn(new ArrayList<>());
-		//Act
-		List<Genre> genres = services.findAll();
-		//Assert
-		Assertions.assertEquals(0, genres.size());
-	}
-	
-	@Test
-	void test_Delete_CallsRepositoryDelete_WhenCalled() {
-		//Act
-		services.delete(mockGenre);
-		//Assert
-		verify(mockRepository, times(1)).delete(mockGenre);
 		verifyNoMoreInteractions(mockRepository);
 	}
 	
