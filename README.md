@@ -3,6 +3,26 @@ Book shop Application created using Spring.
 CRUD operations are performed for all model classes, including findAll. 
 Tests were written in Junit. 
 
+## Running as a Docker Container
+
+The bookshop container uses a custom base image which must be built first
+The base image Dockerfile is in the spring-jdk11-base directory
+Within this directory the following command must be used:
+
+```
+sudo docker build -t "spring-jdk11-base" .
+```
+To then build the bookshop docker container, from the bookshop-spring-1 directory use the following command:
+```
+sudo docker build -t "name" .
+```
+
+Following this the container can be run with:
+```
+sudo docker run -p 8080:8080 -t name
+```
+The -p 8080:8080 flag is necessary to expose port 8080 and requests can be sent to this container in the format:
+http://[ip address]:8080/[url]
 ## Postman Requests
 
 The requests can imported into postman by using the file in the postman directory.
